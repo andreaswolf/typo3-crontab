@@ -48,7 +48,10 @@ EOH
                 $output
             );
         } catch (\Throwable $e) {
-            $this->logger->error(sprintf('Task "%s" failed with exception.', $taskIdentifier), ['exception' => $e]);
+            $this->logger->error(
+                sprintf('Task "%s" failed with exception.', $taskIdentifier),
+                ['exception' => get_class($e), 'message' => $e->getMessage(), 'code' => $e->getCode(), 'trace' => $e->getTraceAsString()]
+            );
             throw $e;
         }
         if (!$success) {
