@@ -4,6 +4,7 @@ namespace Helhum\TYPO3\Crontab\Task;
 
 use Helhum\Typo3Console\Mvc\Cli\Symfony\Input\ArgvInput;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput as SymfonyArgvInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -34,7 +35,7 @@ class CommandExecutor implements TaskExecutor
         array_unshift($argv, '_');
         $output = $output ?? new NullOutput();
 
-        return $application->run(new ArgvInput($argv), $output) === 0;
+        return $application->run(new ArgvInput(new SymfonyArgvInput($argv)), $output) === 0;
     }
 
     public function getTitle(): ?string
